@@ -4,6 +4,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
+// routes
+import authRoutes from './routes/authRoutes.js';
+
 const app = express();
 dotenv.config();
 
@@ -22,6 +25,14 @@ mongoose.set('strictQuery', false);
 mongoose.connection.on('disconnected', () => {
   console.log("MongoDB Disconnected");
 });
+
+// middlewares
+app.use(cors());
+app.use(cookieParser());
+app.use(express.json());
+
+// usage routes
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
