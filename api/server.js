@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 
 // routes
 import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 const app = express();
 dotenv.config();
@@ -33,6 +34,7 @@ app.use(express.json());
 
 // usage routes
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
