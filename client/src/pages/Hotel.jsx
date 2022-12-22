@@ -2,7 +2,12 @@ import React from 'react'
 
 const Hotel = () => {
   return (
-    <div>Hotel</div>
+    <>
+      {/* navbar */}
+      {/* Header */}
+      <div className="hotelContainer">
+      </div>
+    </>
   )
 }
 

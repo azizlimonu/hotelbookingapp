@@ -40,6 +40,18 @@ app.use('/api/user', userRoutes);
 app.use('/api/hotel', hotelRoutes);
 app.use('/api/room', roomRoutes);
 
+// middleware error handling
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something went wrong!";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
   connect();
