@@ -36,9 +36,9 @@ app.use(express.json());
 
 // usage routes
 app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/hotel', hotelRoutes);
-app.use('/api/room', roomRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/hotels', hotelRoutes);
+app.use('/api/rooms', roomRoutes);
 
 // middleware error handling
 app.use((err, req, res, next) => {

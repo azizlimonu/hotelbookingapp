@@ -8,7 +8,7 @@ export const register = async (req, res, next) => {
     const { email } = req.body.email
     const duplicate = await User.findOne({ email });
     if (duplicate) {
-      return res.status(400).send({ message: 'EMAIL IS ALREADY REGISTERED' })
+      return next(createError(400, "EMAIL IS ALREADY REGISTERED")); 
     }
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);

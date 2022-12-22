@@ -1,8 +1,14 @@
 import express from 'express';
-import { createRoom, deleteRoom, getRoom, getRooms, updateRoom, updateRoomAvailability } from '../controllers/roomController.js';
-const router = express.Router();
-
+import {
+  createRoom,
+  deleteRoom,
+  getRoom,
+  getRooms,
+  updateRoom,
+  updateRoomAvailability
+} from '../controllers/roomController.js';
 import { verifyAdmin } from '../utils/verifyToken.js';
+const router = express.Router();
 
 // create Room
 router.post('/:hotelid', verifyAdmin, createRoom)

@@ -22,7 +22,7 @@ export const verifyUser = (req, res, next) => {
       return next(createError(403, "Your are not authorized"));
     }
   });
-}
+};
 
 export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, next, () => {
@@ -32,4 +32,4 @@ export const verifyAdmin = (req, res, next) => {
       return next(createError(403, "Your are not ADMIN"));
     }
   });
-}
+};

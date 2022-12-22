@@ -16,6 +16,7 @@ export const createRoom = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
+    res.status(200).json(savedRoom);
   } catch (error) {
     next(error);
   }
@@ -24,17 +25,14 @@ export const createRoom = async (req, res, next) => {
 // update Room
 export const updateRoom = async (req, res, next) => {
   try {
-    await Room.updateOne(
-      { "roomNumbers._id": req.params.id },
-      {
-        $push: {
-          "roomNumbers.$.unavailableDates": req.body.dates
-        },
-      }
+    const updatedRoom = await Room.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
     );
-    res.status(200).json("Room status has been updated");
-  } catch (error) {
-    next(error);
+    res.status(200).json(updatedRoom);
+  } catch (err) {
+    next(err);
   }
 };
 
@@ -59,12 +57,15 @@ export const deleteRoom = async (req, res, next) => {
 // room available
 export const updateRoomAvailability = async (req, res, next) => {
   try {
-    const updatedRoom = await Room.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
+    await Room.updateOne(
+      { "roomNumbers._id": req.params.id },
+      {
+        $push: {
+          "roomNumbers.$.unavailableDates": req.body.dates
+        },
+      }
     );
-    res.status(200).json(updatedRoom);
+    res.status(200).json("Room status has been updated.");
   } catch (err) {
     next(err);
   }
