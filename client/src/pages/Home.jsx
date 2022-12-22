@@ -1,4 +1,5 @@
 import React from 'react';
+import Featured from '../components/featured/Featured';
 import Footer from '../components/footer/Footer';
 import Header from '../components/header/Header';
 import Navbar from '../components/navbar/Navbar';
@@ -10,12 +11,9 @@ const Home = () => {
       <Navbar />
       <Header />
       <div className='homeContainer'>
-        {/* Featured */}
+        <Featured />
         <h1 className="homeTitle">Browse by property type</h1>
-        {/* <PropertyList /> */}
         <h1 className="homeTitle">Homes guests love</h1>
-        {/* <FeaturedProperties /> */}
-        {/* <MailList /> */}
         <Footer />
       </div>
     </>
