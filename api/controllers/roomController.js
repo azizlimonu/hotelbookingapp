@@ -4,21 +4,21 @@ import { createError } from '../utils/error.js';
 
 // create Room
 export const createRoom = async (req, res, next) => {
-  const hotelId = req.params.hotelId;
+  const hotelId = req.params.hotelid;
   const newRoom = new Room(req.body);
 
   try {
     const savedRoom = await newRoom.save();
     try {
       await Hotel.findByIdAndUpdate(hotelId, {
-        $push: { rooms: savedRoom._id }
-      });
-    } catch (error) {
-      next(error);
+        $push: { rooms: savedRoom._id },
+      }, { new: true });
+    } catch (err) {
+      next(err);
     }
     res.status(200).json(savedRoom);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 };
 
