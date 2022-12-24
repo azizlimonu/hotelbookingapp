@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
 import SearchItem from '../../components/searchItem/SearchItem';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import './list.css';
@@ -11,12 +10,14 @@ import useFetch from '../../hooks/useFetch';
 
 const List = () => {
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
+  const destination = location.state.destination;
+  const options = location.state.options;
   const [dates, setDates] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
+  // const [destination, setDestination] = useState(location.state.destination);
+  // const [options, setOptions] = useState(location.state.options);
   // const [data, setData] = useState([]);
   // const [loading, setLoading] = useState(false);
 
@@ -71,7 +72,7 @@ const List = () => {
             </div>
 
             <div className="lsItem">
-              <label>Options</label>
+              <label>Filter By</label>
               <div className="lsOptions">
                 {/* min price */}
                 <div className="lsOptionItem">
@@ -133,7 +134,7 @@ const List = () => {
           </div>
           {/* right side */}
           <div className="listResult">
-            {loading ? "loading..." : (
+            {loading ? "loading..." : error ? "error occured" : (
               <>
                 {data?.map((item) => (
                   <SearchItem item={item} key={item._id} />
