@@ -47,7 +47,7 @@ export const getHotel = async (req, res, next) => {
   }
 };
 
-// get all hotels
+// get hotel by price
 export const getHotels = async (req, res, next) => {
   const { min, max, ...others } = req.query;
   try {
