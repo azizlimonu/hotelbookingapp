@@ -15,6 +15,7 @@ import useFetch from '../../hooks/useFetch';
 import './hotel.css';
 import Footer from '../../components/footer/Footer';
 import MailList from '../../components/maillist/MailList';
+import Reserve from '../../components/reserve/Reserve';
 
 const Hotel = () => {
   const location = useLocation();
@@ -143,7 +144,7 @@ const Hotel = () => {
           <Footer />
         </div>
       )}
-      {/* {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />} */}
+      {openModal && <Reserve setOpen={setOpenModal} hotelId={id} />}
     </>
   )
 }
