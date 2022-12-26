@@ -60,6 +60,8 @@
 
 .hotelImg {
   width: 100%;
+  width: 337px;
+  height: 253px;
   object-fit: cover;
   cursor: pointer;
 }

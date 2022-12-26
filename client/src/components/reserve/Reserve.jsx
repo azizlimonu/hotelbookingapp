@@ -1,16 +1,16 @@
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { SearchContext } from '../../context/SearchContext';
-import useFetch from '../../hooks/useFetch';
-import './reserve.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+
+import "./reserve.css";
+import useFetch from "../../hooks/useFetch";
+import { useContext, useState } from "react";
+import { SearchContext } from "../../context/SearchContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Reserve = ({ setOpen, hotelId }) => {
-  const navigate = useNavigate();
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`)
+  const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -25,16 +25,19 @@ const Reserve = ({ setOpen, hotelId }) => {
       dates.push(new Date(date).getTime());
       date.setDate(date.getDate() + 1);
     }
+
     return dates;
-  }
+  };
 
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>
-      alldates.includes(new Date(date).getTime()));
-    return !isFound
-  }
+      alldates.includes(new Date(date).getTime())
+    );
+
+    return !isFound;
+  };
 
   const handleSelect = (e) => {
     const checked = e.target.checked;
@@ -44,7 +47,9 @@ const Reserve = ({ setOpen, hotelId }) => {
         ? [...selectedRooms, value]
         : selectedRooms.filter((item) => item !== value)
     );
-  }
+  };
+
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     try {
@@ -60,7 +65,6 @@ const Reserve = ({ setOpen, hotelId }) => {
       navigate("/");
     } catch (err) { }
   };
-
   return (
     <div className="reserve">
       <div className="rContainer">
@@ -70,8 +74,8 @@ const Reserve = ({ setOpen, hotelId }) => {
           onClick={() => setOpen(false)}
         />
         <span>Select your rooms:</span>
-        {loading ? "loading..." : error ? "error occured" : (
-          data?.map((item) => (
+        {loading ? "loading..." : error ? "error..." : (
+          data.map((item) => (
             <div className="rItem" key={item._id}>
               <div className="rItemInfo">
                 <div className="rTitle">{item.title}</div>
@@ -95,14 +99,14 @@ const Reserve = ({ setOpen, hotelId }) => {
                 ))}
               </div>
             </div>
-          ))
-        )}
+          )))
+        }
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Reserve;
