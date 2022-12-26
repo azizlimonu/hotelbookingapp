@@ -27,9 +27,9 @@ const Hotel = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
+  console.log(data);
   const { user } = useContext(AuthContext);
   const { dates, options } = useContext(SearchContext);
-  // console.log(dates);
 
   // function to search how many days to stay
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -86,7 +86,7 @@ const Hotel = () => {
               />
               <div className="sliderWrapper">
                 <img
-                  src={data.photos[slideNumber]}
+                  src={data?.photos[slideNumber]}
                   alt=""
                   className="sliderImg"
                 />
@@ -100,20 +100,20 @@ const Hotel = () => {
           )}
           <div className="hotelWrapper">
             <button className="bookNow">Reserve or Book Now!</button>
-            <h1 className="hotelTitle">{data.name}</h1>
+            <h1 className="hotelTitle">{data?.name}</h1>
             <div className="hotelAddress">
               <FontAwesomeIcon icon={faLocationDot} />
-              <span>{data.address}</span>
+              <span>{data?.address}</span>
             </div>
             <span className="hotelDistance">
-              Excellent location – {data.distance}m from center
+              Excellent location – {data?.distance}m from center
             </span>
             <span className="hotelPriceHighlight">
-              Book a stay over ${data.cheapestPrice} at this property and get a
+              Book a stay over ${data?.cheapestPrice} at this property and get a
               free airport taxi
             </span>
             <div className="hotelImages">
-              {data.photos?.map((photo, i) => (
+              {data?.photos?.map((photo, i) => (
                 <div className="hotelImgWrapper" key={i}>
                   <img
                     onClick={() => handleOpen(i)}
@@ -126,22 +126,24 @@ const Hotel = () => {
             </div>
             <div className="hotelDetails">
               <div className="hotelDetailsTexts">
-                <h1 className="hotelTitle">{data.title}</h1>
+                <h1 className="hotelTitle">{data?.title}</h1>
                 <p className="hotelDesc">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
                 </p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for a {days}-night stay!</h1>
+                <h1>Perfect for a {days || ""}-night stay!</h1>
                 <span>
-                  Located in {data.address}
+                  Located in {data?.address}
                 </span>
                 <h2>
                   <b>
-                    $ {days * data.cheapestPrice * options.room}
+                    $ {days
+                      ? data?.cheapestPrice * days * options.room
+                      : data?.cheapestPrice}
                   </b>
-                  ({days}{" "}-night)
+                  ({days ? days : "1"}{" "}-night)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>

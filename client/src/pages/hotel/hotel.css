@@ -7,7 +7,7 @@
 
 .hotelWrapper {
   width: 100%;
-  max-width: 1024px;
+  max-width: 1140px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -51,11 +51,13 @@
 .hotelImages {
   display: flex;
   flex-wrap: wrap;
+  padding: 5px;
   justify-content: space-between;
 }
 
 .hotelImgWrapper {
-  width: 33%;
+  /* width: 33%; */
+  margin: 5px;
 }
 
 .hotelImg {

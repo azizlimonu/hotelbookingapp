@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../../components/navbar/Navbar';
 import Header from '../../components/header/Header';
 import SearchItem from '../../components/searchItem/SearchItem';
@@ -6,8 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { format } from 'date-fns';
 import { DateRange } from 'react-date-range';
 import './list.css';
-// import useFetch from '../../hooks/useFetch';
-import axios from 'axios';
+// import axios from 'axios';
 import useFetch from '../../hooks/useFetch';
 import { SearchContext } from '../../context/SearchContext';
 
@@ -15,31 +14,20 @@ const List = () => {
   const location = useLocation();
   const [dates, setDates] = useState(location.state.dates);
   const [openDate, setOpenDate] = useState(false);
-  const [min, setMin] = useState(undefined);
-  const [max, setMax] = useState(undefined);
-  const [destination, setDestination] = useState(location.state.destination);
+  const [min, setMin] = useState("0");
+  const [max, setMax] = useState("999");
+  const [destination, setDestination] = useState(location.state.destination || { adult: 1, children: 0, room: 1 });
   const [options, setOptions] = useState(location.state.options);
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [openOptions, setOpenOptions] = useState(false)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const result = await axios.get(
-        `/hotels?city=${destination}&min=${min || 0}&max=${max || 999}`
-      )
-      setLoading(false);
-      setData(result);
-    };
-    fetchData();
-    console.log("api triggered")
-  }, [destination, max, min]);
+  const [openOptions, setOpenOptions] = useState(false);
 
+  const { data, loading, reFetch } = useFetch(`
+  /hotels?city=${destination}&min=${min}&max=${max}
+  `);
 
-  const { reFetch } = useFetch(
-    `/hotels?city=${destination}&min=${min}&max=${max}`
-  );
+  const { data: count } = useFetch(`
+  /hotels/countByCity?cities=${destination}
+  `);
   const { dispatch } = useContext(SearchContext);
 
   const handleOptions = (name, operation) => {
@@ -53,7 +41,7 @@ const List = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch && dispatch({ type: 'NEW_SEARCH', payload: { destination, dates, options } });
+    dispatch({ type: 'NEW_SEARCH', payload: { destination, dates, options } });
     reFetch();
   }
 
@@ -211,6 +199,9 @@ const List = () => {
           <div className="listResult">
             {loading ? "loading..." : (
               <>
+                <h1>
+                  {destination?.toUpperCase() || '..'} : {(count && count[0]) || "-"} Property Found
+                </h1>
                 {data?.map((item) => (
                   <SearchItem item={item} key={item._id} />
                 ))}
