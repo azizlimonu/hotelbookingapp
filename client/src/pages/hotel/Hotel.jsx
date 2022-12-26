@@ -28,19 +28,19 @@ const Hotel = () => {
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
-  const { dates } = useContext(SearchContext);
-  console.log(dates);
+  const { dates, options } = useContext(SearchContext);
+  // console.log(dates);
 
-  // const { dates, options } = useContext(SearchContext);
+  // function to search how many days to stay
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
 
-  // const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-  // function dayDifference(date1, date2) {
-  //   const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-  //   const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
-  //   return diffDays;
-  // }
-
-  // const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
+  // console.log(days);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
@@ -133,13 +133,15 @@ const Hotel = () => {
                 </p>
               </div>
               <div className="hotelDetailsPrice">
-                {/* <h1>Perfect for a {days}-night stay!</h1> */}
+                <h1>Perfect for a {days}-night stay!</h1>
                 <span>
                   Located in {data.address}
                 </span>
                 <h2>
-                  {/* <b>${days * data.cheapestPrice * options.room}</b> ({days}{" "}
-                  nights) */}
+                  <b>
+                    $ {days * data.cheapestPrice * options.room}
+                  </b>
+                  ({days}{" "}-night)
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
