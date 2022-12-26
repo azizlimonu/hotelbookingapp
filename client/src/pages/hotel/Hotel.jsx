@@ -16,6 +16,7 @@ import './hotel.css';
 import Footer from '../../components/footer/Footer';
 import MailList from '../../components/maillist/MailList';
 import Reserve from '../../components/reserve/Reserve';
+import { SearchContext } from '../../context/SearchContext';
 
 const Hotel = () => {
   const location = useLocation();
@@ -27,6 +28,8 @@ const Hotel = () => {
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   const { user } = useContext(AuthContext);
+  const { dates } = useContext(SearchContext);
+  console.log(dates);
 
   // const { dates, options } = useContext(SearchContext);
 
