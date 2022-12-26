@@ -4,21 +4,55 @@ import { AuthContext } from '../../context/AuthContext';
 import './navbar.css';
 
 const Navbar = ({ type }) => {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' });
+  };
+
   return (
-    <div className="navbar">
-      <div className="navContainer">
-        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-          <span className="logo">lamabooking</span>
+    <div className='navbar'>
+      <div className='navContainer'>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+          <span className='navLogo'>
+            Booking Clone
+          </span>
         </Link>
         {user ? (
-          <p> {user.username}</p>
-        ) : type !== 'form' && (
-          <div className="navItems">
-            <button className="navButton" onClick={() => navigate('/register')}>Register</button>
-            <button className="navButton" onClick={() => navigate('/login')}>Login</button>
+          <div className='navItems'>
+            <button
+              className='navInfo-btn'
+              onClick={() => navigate('/reservations')}
+            >
+              List your reservations
+            </button>
+            {user.username}
+            <button
+              className='navItems-btn'
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className='navItems'>
+            {type !== 'login' && type !== 'register' && (
+              <>
+                <button
+                  className='navItems-btn'
+                  onClick={()=>navigate('/register')}
+                >
+                  Register
+                </button>
+                <button
+                  className='navItems-btn'
+                  onClick={()=>navigate('/login')}
+                >
+                  Sign in
+                </button>
+              </>
+            )}
           </div>
         )}
       </div>

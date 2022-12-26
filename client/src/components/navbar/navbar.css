@@ -3,25 +3,50 @@
   background-color: #003580;
   display: flex;
   justify-content: center;
+  padding: 10px;
 }
 
 .navContainer {
   width: 100%;
-  max-width: 1024px;
+  max-width: 1140px;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.logo {
-  font-weight: 500;
+.navLogo {
+  font-weight: bold;
+  font-size: 24px;
 }
 
-.navButton {
-  margin-left: 20px;
-  border: none;
-  padding: 5px 10px;
+.navItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.navInfo-btn {
+  font-weight: 600;
+  margin-left: 10px;
+  border-color: white;
+  padding: 8px 16px;
+  color: white;
   cursor: pointer;
-  color: #003580;
+  background-color: #003580;
+}
+
+.navinfo-btn:hover {
+  background-color: #275191;
+}
+
+.navItems-btn {
+  font-weight: 600;
+  margin-left: 10px;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #0071c2;
+  background-color: white;
 }
