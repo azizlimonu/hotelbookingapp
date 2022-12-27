@@ -1,12 +1,20 @@
 import { createContext, useReducer } from "react";
 
+const currentDate = new Date();
+
 const INITIAL_STATE = {
   city: undefined,
-  dates: [],
+  dates: [
+    {
+      startDate: currentDate,
+      endDate: new Date(currentDate.getTime() + 86400000),
+      key: 'selection'
+    }
+  ],
   options: {
-    adult: undefined,
-    children: undefined,
-    room: undefined,
+    adult: 1,
+    children: 0,
+    room: 1,
   },
 };
 

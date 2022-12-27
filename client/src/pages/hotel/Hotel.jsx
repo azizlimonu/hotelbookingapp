@@ -30,7 +30,7 @@ const Hotel = () => {
   console.log(data);
   const { user } = useContext(AuthContext);
   const { dates, options } = useContext(SearchContext);
-  console.log(dates);
+  console.log("dates",dates);
 
   // function to search how many days to stay
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
