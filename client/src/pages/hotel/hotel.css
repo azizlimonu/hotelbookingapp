@@ -244,8 +244,6 @@
   margin: 10px;
 }
 
-.optionsText {}
-
 .optionCounter {
   display: flex;
   align-items: center;
@@ -267,11 +265,11 @@
   cursor: not-allowed;
 }
 
-.optionsCounterNumber {}
+/* .optionsCounterNumber {}
 
 .optionItem {}
 
-.optionText {}
+.optionText {} */
 
 .headerBtn{
   width: 100%;

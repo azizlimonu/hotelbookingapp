@@ -1,16 +1,23 @@
 import React from 'react';
+import { useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import './featuredproperty.css';
 
 const FeaturedProperties = () => {
-  const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
-
+  const { data, loading, error } = useFetch("/hotels?featured=true");
+  // const [dataProperty, setDataProperty] = useState([]);
+  
+  // if(data){
+  //   setDataProperty(data.slice(0,4));
+  // }
+  const dataProperty = data.slice(0,4);
+  console.log(dataProperty);
 
   return (
     <div className='fp'>
       {loading ? "loading..." : error ? "Error Occured " : (
         <>
-          {data?.map((item) => (
+          {dataProperty?.map((item) => (
             <div className="fpItem" key={item._id}>
               <img
                 src={item.photos[0]}
