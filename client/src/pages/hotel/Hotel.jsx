@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faCalendarDays,
   faCircleArrowLeft,
   faCircleArrowRight,
   faCircleXmark,
   faLocationDot,
+  faPerson,
 } from "@fortawesome/free-solid-svg-icons";
 import Header from '../../components/header/Header';
 import Navbar from '../../components/navbar/Navbar';
@@ -17,20 +19,46 @@ import Footer from '../../components/footer/Footer';
 import MailList from '../../components/maillist/MailList';
 import Reserve from '../../components/reserve/Reserve';
 import { SearchContext } from '../../context/SearchContext';
+import { format } from 'date-fns';
+import { DateRange } from 'react-date-range';
 
 const Hotel = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { dates: contextDates,
+    options: contextOptions,
+    dispatch,
+  } = useContext(SearchContext);
   const id = location.pathname.split('/')[2];
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [dates, setDates] = useState(contextDates);
+  const [options, setOptions] = useState(contextOptions);
+  const [openOptions, setOpenOptions] = useState(false);
+  const [openDate, setOpenDate] = useState(false);
+
+  const handleOption = (name, operation) => {
+    setOptions((prev) => {
+      return {
+        ...prev,
+        [name]: operation === 'i' ? options[name] + 1 : options[name] - 1,
+      };
+    });
+  };
+
+  const handleSearch = () => {
+    dispatch &&
+    dispatch({
+      type: 'NEW_SEARCH',
+      payload: { destination: data?.city, dates, options },
+    });
+  };
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
   console.log(data);
   const { user } = useContext(AuthContext);
-  const { dates, options } = useContext(SearchContext);
-  console.log("dates",dates);
+  // console.log("dates", dates);
 
   // function to search how many days to stay
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -73,6 +101,7 @@ const Hotel = () => {
       <Header type='list' />
       {loading ? "loading ..." : error ? "error occured" : (
         <div className="hotelContainer">
+          {/* image modal backdrop */}
           {open && (
             <div className="slider">
               <FontAwesomeIcon
@@ -99,6 +128,7 @@ const Hotel = () => {
               />
             </div>
           )}
+          {/* hotel section */}
           <div className="hotelWrapper">
             <button className="bookNow">Reserve or Book Now!</button>
             <h1 className="hotelTitle">{data?.name}</h1>
@@ -148,6 +178,110 @@ const Hotel = () => {
                 </h2>
                 <button onClick={handleClick}>Reserve or Book Now!</button>
               </div>
+            </div>
+          </div>
+          {/* Date picker */}
+          <div className="headerSearch">
+            <div className="headerSearchItem">
+              <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
+              <span
+                onClick={() => setOpenDate(!openDate)}
+                className="headerSearchText"
+              >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(
+                dates[0].endDate,
+                "MM/dd/yyyy"
+              )}`}</span>
+              {openDate && (
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={(item) => setDates([item.selection])}
+                  moveRangeOnFirstSelection={false}
+                  ranges={dates}
+                  className="date"
+                  minDate={new Date()}
+                />
+              )}
+            </div>
+            <div className="headerSearchItem">
+              <FontAwesomeIcon icon={faPerson} className="headerIcon" />
+              <span
+                onClick={() => setOpenOptions(!openOptions)}
+                className="headerSearchText"
+              >
+                {`${options.adult} adult · ${options.children} children · ${options.room} room`}
+              </span>
+              {openOptions && (
+                <div className="options">
+                  <div className="optionItem">
+                    <span className="optionText">Adult</span>
+                    <div className="optionCounter">
+                      <button
+                        disabled={options.adult <= 1}
+                        className="optionCounterButton"
+                        onClick={() => handleOption("adult", "d")}
+                      >
+                        -
+                      </button>
+                      <span className="optionCounterNumber">
+                        {options.adult}
+                      </span>
+                      <button
+                        className="optionCounterButton"
+                        onClick={() => handleOption("adult", "i")}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="optionItem">
+                    <span className="optionText">Children</span>
+                    <div className="optionCounter">
+                      <button
+                        disabled={options.children <= 0}
+                        className="optionCounterButton"
+                        onClick={() => handleOption("children", "d")}
+                      >
+                        -
+                      </button>
+                      <span className="optionCounterNumber">
+                        {options.children}
+                      </span>
+                      <button
+                        className="optionCounterButton"
+                        onClick={() => handleOption("children", "i")}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div className="optionItem">
+                    <span className="optionText">Room</span>
+                    <div className="optionCounter">
+                      <button
+                        disabled={options.room <= 1}
+                        className="optionCounterButton"
+                        onClick={() => handleOption("room", "d")}
+                      >
+                        -
+                      </button>
+                      <span className="optionCounterNumber">
+                        {options.room}
+                      </span>
+                      <button
+                        className="optionCounterButton"
+                        onClick={() => handleOption("room", "i")}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="headerSearchItem">
+              <button className="headerBtn" onClick={handleSearch}>
+                Apply Changes
+              </button>
             </div>
           </div>
           <MailList />
