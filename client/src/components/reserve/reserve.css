@@ -13,7 +13,8 @@
 .rContainer {
   background-color: white;
   padding: 20px;
-  position: relative;
+  position: absolute;
+  width: 400px;
 }
 
 .rClose {
@@ -28,6 +29,13 @@
   align-items: center;
   gap: 50px;
   padding: 20px;
+}
+
+.rItemInfo{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 280px;
 }
 
 .rInfo {

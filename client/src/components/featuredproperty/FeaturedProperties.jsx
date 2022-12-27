@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import useFetch from '../../hooks/useFetch';
+import './featuredproperty.css';
 
 const FeaturedProperties = () => {
   const { data, loading, error } = useFetch("/hotels?featured=true&limit=4");
