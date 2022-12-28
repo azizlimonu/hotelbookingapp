@@ -2,6 +2,7 @@ import express from 'express';
 import {
   createRoom,
   deleteRoom,
+  getMultipleRooms,
   getRoom,
   getRooms,
   updateRoom,
@@ -23,9 +24,12 @@ router.post('/availability/:id', updateRoomAvailability)
 router.delete('/:id/:hotelid', verifyAdmin, deleteRoom);
 
 // get Room by id
-router.get('/:id', getRoom)
+router.get('/:id', getRoom);
+
+// get multiple rooms
+router.get('/multiple/:id',getMultipleRooms);
 
 // get Room
-router.get('/', getRooms)
+router.get('/', getRooms);
 
 export default router;

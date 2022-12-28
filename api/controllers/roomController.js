@@ -90,3 +90,31 @@ export const getRooms = async (req, res, next) => {
     next(err);
   }
 };
+
+// get multiple rooms
+export const getMultipleRooms = async (req, res, next) => {
+  const idRooms = req.params.id.split(',');
+  console.log(idRooms);
+
+  try {
+    const roomList = await Promise.all(
+      idRooms.map((roomId) => {
+        return Room.find({ 'roomNumbers._id': roomId })
+      })
+    );
+    const formattedRoomList = roomList.map((room) => {
+      return room[0];
+    });
+    const uniqueRoomIdList = Array.from(
+      new Set(formattedRoomList.map((item) => item.id)),
+    );
+    const uniqueRoomList = await Promise.all(
+      uniqueRoomIdList.map((roomId) => {
+        return Room.findById(roomId);
+      }),
+    )
+
+  } catch (error) {
+    next(error);
+  }
+};
