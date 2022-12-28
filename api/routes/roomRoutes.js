@@ -15,10 +15,10 @@ const router = express.Router();
 router.post('/:hotelid', verifyAdmin, createRoom)
 
 // update room status
-router.post('/:id', verifyAdmin, updateRoom);
+router.put('/:id', verifyAdmin, updateRoom);
 
 // update Room availability
-router.post('/availability/:id', updateRoomAvailability)
+router.put('/availability/:id', updateRoomAvailability)
 
 // delete Room
 router.delete('/:id/:hotelid', verifyAdmin, deleteRoom);

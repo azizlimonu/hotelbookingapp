@@ -14,6 +14,7 @@ const ReserveDetails = ({
   formData,
   setFormData,
 }) => {
+  console.log(hotel,roomData)
 
   const { dates } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
@@ -25,7 +26,7 @@ const ReserveDetails = ({
   };
 
   return (
-    <div className='reserve'>
+    <div className='reserved'>
       <ReserveSideBar roomData={roomData} hotel={hotel} />
 
       <div className="reserve-personal">

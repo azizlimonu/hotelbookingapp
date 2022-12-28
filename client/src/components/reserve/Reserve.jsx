@@ -4,13 +4,15 @@ import './reserve.css';
 import useFetch from "../../hooks/useFetch";
 import { useContext, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ReserveContext } from "../../context/ReserveContext";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const { dates } = useContext(SearchContext);
+  const { dispatch: reserveDispatch } = useContext(ReserveContext);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -52,18 +54,26 @@ const Reserve = ({ setOpen, hotelId }) => {
 
   const handleClick = async () => {
     try {
-      await Promise.all(
-        selectedRooms.map((roomId) => {
-          const res = axios.put(`/rooms/availability/${roomId}`, {
-            dates: alldates,
-          });
-          return res.data;
-        })
-      );
       setOpen(false);
-      navigate("/");
-    } catch (err) { }
+      reserveDispatch && reserveDispatch({
+        type: 'NEW_RESERVE',
+        payload: { selectedRooms }
+      });
+      navigate(`/reserve/${hotelId}`);
+      // await Promise.all(
+      //   selectedRooms.map((roomId) => {
+      //     const res = axios.put(`/rooms/availability/${roomId}`, {
+      //       dates: alldates,
+      //     });
+      //     return res.data;
+      //   })
+      // );
+    } catch (error) {
+      console.log(error)
+    }
   };
+  // console.log(alldates);
+
   return (
     <div className="reserve">
       <div className="rContainer">

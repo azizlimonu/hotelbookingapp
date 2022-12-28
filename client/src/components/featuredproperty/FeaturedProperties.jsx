@@ -10,7 +10,7 @@ const FeaturedProperties = () => {
   //   setDataProperty(data.slice(0,4));
   // }
   const dataProperty = data.slice(0,4);
-  console.log(dataProperty);
+  // console.log(dataProperty);
 
   return (
     <div className='fp'>

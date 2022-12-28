@@ -56,7 +56,7 @@ const Hotel = () => {
   };
 
   const { data, loading, error } = useFetch(`/hotels/find/${id}`);
-  console.log(data);
+  // console.log(data);
   const { user } = useContext(AuthContext);
   // console.log("dates", dates);
 
