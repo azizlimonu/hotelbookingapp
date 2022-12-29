@@ -1,0 +1,214 @@
+.rb {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rbd {
+  padding: 16px;
+  border: 1px solid lightgray;
+}
+
+.rbdh {
+  margin-bottom: 16px;
+}
+
+.rbdc {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rbdcd {
+  display: flex;
+  align-items: flex-start;
+}
+
+.rbdcdc-i,
+.rbdcdc-o {
+  flex: 1;
+}
+
+.rbdcdc-i h5,
+.rbdcdc-o h5 {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.rbdcdc-i p,
+.rbdcdc-o p {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.rbdcdc-i span,
+.rbdcdc-o span {
+  font-size: 14px;
+  color: gray;
+}
+
+.rbdcd-l h5 {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.rbdcd-l span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.rbdc hr {
+  border: 0;
+  border-top: 1px solid lightgray;
+}
+
+.rbdcs-r h5 {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.rbdcs-rc {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  gap: 6px;
+  margin-bottom: 12px;
+
+}
+
+.rbdcs-rc span {
+  font-size: 12px;
+  border: none;
+  border-radius: 2px;
+  margin-right: 4px;
+  padding: 2px 4px;
+  background-color: #0071c2;
+  color: #fff;
+}
+
+.rbdcs-r-c-cs {
+  color: #0071c2;
+  padding: 8px 8px 8px 0;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.rbdcs-r-c-cs:hover {
+  background-color: rgba(0, 113, 194, 0.1);
+}
+
+.rbp-s {
+  border: 1px solid lightgray;
+}
+
+.rbp-sh {
+  padding: 16px 16px 0 16px;
+  margin-bottom: 16px;
+}
+
+.rbp-sc {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rbp-sc hr {
+  margin: 0 16px;
+  border: 0;
+  border-top: 1px solid lightgray;
+}
+
+.rbp-s-cp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.rbp-scpi {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rbp-scpi span {
+  font-size: 14px;
+}
+
+.rbp-scp-t {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ebf3ff;
+  padding: 16px;
+}
+
+.rbp-scp-t span {
+  font-weight: bold;
+}
+
+.rbp-sce-c {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.rbp-sce-ci {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rbp-sce-ci span {
+  font-size: 14px;
+}
+
+.rbp-sce-ci b {
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  background-color: #008009;
+  padding: 3px 5px;
+  border-radius: 2px;
+}
+
+.rbp-scm-i {
+  padding: 0 16px;
+}
+
+.rbp-scm-i span {
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.rbp-sch {
+  padding: 16px;
+  border: 1px solid lightgray;
+}
+
+.rbp-schh {
+  margin-bottom: 16px;
+}
+
+.rbp-schc {
+  font-size: 14px;
+  color: #008009;
+}
+
+.rbc-c {
+  padding: 16px;
+  border: 1px solid lightgray;
+}
+
+.rbc-ch {
+  margin-bottom: 16px;
+}
+
+.rbc-cc {
+  font-size: 14px;
+  color: #008009;
+}

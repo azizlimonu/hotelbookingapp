@@ -291,15 +291,16 @@
 
 .reserve-personal-container-arrival h3 {
   font-size: 16px;
+  margin-bottom: 15px;
 }
 
-arrival-container {
+.arrival-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-arrival-container {
+.arrival-container {
   margin-bottom: 16px;
 }
 

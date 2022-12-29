@@ -18,7 +18,7 @@ const ReservePage = () => {
   const hotelId = location.pathname.split('/')[2];
 
   const { selectedRooms } = useContext(ReserveContext);
-  const { data: hotelData, loading: hotelLoading,error:hotelError } = useFetch(
+  const { data: hotelData, loading: hotelLoading, error: hotelError } = useFetch(
     `/hotels/find/${hotelId}`
   );
 
@@ -59,15 +59,19 @@ const ReservePage = () => {
             setFormData={setFormData}
           />
         )}
-        {/* {step === 2 && (
+        {step === 2 && (
           <ReserveFinalStep
             setStep={setStep}
             hotel={hotelData}
+            hotelLoading={hotelLoading}
+            hotelError={hotelError}
             roomData={roomData}
+            roomLoading={roomLoading}
+            roomError={roomError}
             formData={formData}
             setFormData={setFormData}
           />
-        )} */}
+        )}
       </div>
     </>
   )

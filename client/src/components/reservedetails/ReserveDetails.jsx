@@ -29,7 +29,9 @@ const ReserveDetails = ({
       return { ...prev, [key]: value };
     });
   };
-  console.log("Room is now", selectedRooms);
+  // console.log("Room is now", selectedRooms);
+  // console.log(hotel);
+  // console.log(roomData)
 
   // console.log("prop room", roomData);
   return (
@@ -41,22 +43,22 @@ const ReserveDetails = ({
       )}
       {hotelLoading ? "Hotel Is Loading" : hotelError ? "Hotel Error" : (
         hotel && (
-          <div className="reserve-personal">
+          <div className='reserve-personal'>
             <div className="reserve-personal-container">
               <div className="reserve-personal-container-hotel">
                 <div className="reserve-personal-container-hotel-container">
-                  <img src={hotel?.photos[0]} alt='hotel-img' />
-                  <div className='reserve-personal-hotel-container-details'>
-                    {/* details */}
+                  <img src={hotel.photos? hotel.photos[0] : ""} alt='hotel-img' />
+                  <div className="reserve-personal-hotel-container-details">
                     <div className="reserve-personal-details-title">
-                      <span>{hotel?.type.toUpperCase()}</span>
+                      <span>{hotel.type?.toUpperCase()}</span>
                       <FontAwesomeIcon icon={faStar} />
                       <FontAwesomeIcon icon={faStar} />
                       <FontAwesomeIcon icon={faStar} />
                       <FontAwesomeIcon icon={faStar} />
                     </div>
-                    <h3>{hotel?.name}</h3>
-                    <span>{hotel?.address}</span>
+
+                    <h3>{hotel.name}</h3>
+                    <span>{hotel.address}</span>
                     <span className='reserve-personal-details-review'>
                       Great Services - 8.8
                     </span>
@@ -65,8 +67,7 @@ const ReserveDetails = ({
                       <span>Excellent</span>
                     </div>
 
-                    {/* icons service hotel */}
-                    <div className='reserve-personal-details-service'>
+                    <div className="reserve-personal-details-service">
                       <div className='reserve-details-service-item'>
                         <FontAwesomeIcon icon={faParking} />
                         Parking
@@ -84,7 +85,6 @@ const ReserveDetails = ({
                         Airport shuttle
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -133,10 +133,11 @@ const ReserveDetails = ({
                       size="lg"
                     />
                     <span>
-                      {`Congratulations! You've chosen the cheapest ${hotel?.type} at ${hotel?.name}. Don't miss out, book now!`}
+                      {`Congratulations! You've chosen the cheapest ${hotel.type} at ${hotel.name}. Don't miss out, book now!`}
                     </span>
                   </div>
                 </div>
+
               </div>
 
               <div className="reserve-personal-container-details">
@@ -148,13 +149,13 @@ const ReserveDetails = ({
 
                   <div className="reserve-personal-container-details-header-username">
                     <FontAwesomeIcon icon={faUserTie} color="#003580" />
-                    {user?.username}
+                    {user.username}
                   </div>
                 </div>
 
                 <div className="reserve-personal-container-details-form">
                   <div className="reserve-details-form-work">
-                    <h5>Are you traveling for work?</h5>
+                    <h5>Are you traveling for work</h5>
                     <div className="reserve-details-form-work-input">
                       <input
                         type="radio"
@@ -185,7 +186,7 @@ const ReserveDetails = ({
                         <label>First Name</label>
                         <input
                           type="text"
-                          placeholder="Duong"
+                          placeholder="first name"
                           defaultValue={formData.firstName}
                           onChange={(e) =>
                             handleChange('firstName', e.target.value)
@@ -197,7 +198,7 @@ const ReserveDetails = ({
                         <label>Last Name</label>
                         <input
                           type="text"
-                          placeholder="Nguyen"
+                          placeholder="last name"
                           defaultValue={formData.lastName}
                           onChange={(e) => handleChange('lastName', e.target.value)}
                         />
@@ -218,7 +219,7 @@ const ReserveDetails = ({
                 </div>
 
                 <div className="reserve-personal-container-details-booking">
-                  <h5>Who are you booking for?</h5>
+                  <h5>Who are you booking for</h5>
                   <div className="details-booking-container">
                     <div className="details-booking-container-input">
                       <input
@@ -293,8 +294,6 @@ const ReserveDetails = ({
                   </div>
                 </div>
               </div>
-
-
             </div>
 
             <button onClick={() => setStep(2)} className='reserve-btn'>
