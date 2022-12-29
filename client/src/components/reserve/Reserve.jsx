@@ -57,7 +57,7 @@ const Reserve = ({ setOpen, hotelId }) => {
         : selectedRooms.filter((item) => item !== value),
     );
   };
-  console.log("selectedRooms", selectedRooms);
+  // console.log("selectedRooms", selectedRooms);
 
   const handleReserve = async () => {
     try {
@@ -103,7 +103,8 @@ const Reserve = ({ setOpen, hotelId }) => {
                       type="checkbox"
                       value={roomNumber._id}
                       onChange={handleSelect}
-                      disabled={!isAvailable(roomNumber) || numberOfSelect >= options.room}
+                      disabled={
+                        !isAvailable(roomNumber) || numberOfSelect >= options.room}
                       onClick={handleCheckBox}
                     />
                   </div>

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import ReserveDetails from '../../components/reservedetails/ReserveDetails';
@@ -11,37 +10,19 @@ import useFetch from '../../hooks/useFetch';
 
 const ReservePage = () => {
   const [step, setStep] = useState(1);
-  const location = useLocation();
-  const hotelId = location.pathname.split('/')[2];
-  const [roomArray, setRoomArray] = useState([]);
-  // console.log(hotelId);
-  const { selectedRooms } = useContext(ReserveContext);
-  // console.log("rsv[rooms]:", selectedRooms)
-  // fetch hotel data
-  const { data: hotelData } = useFetch(
-    `/hotels/find/${hotelId}`
-  );
-
-  // fetch room data
-  useEffect(() => {
-    const fetchData = async () => {
-      const roomArr = await Promise.all(
-        selectedRooms?.map((roomId) => {
-          const res = axios.get(`/rooms/multiple/${roomId}`);
-          return res
-        })
-      );
-      setRoomArray(roomArr);
-    }
-    fetchData();
-  }, [selectedRooms]);
-  // console.log("roomArr", roomArray);
 
   const { dates } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
-  // console.log("hotel data:", hotelData);
-  // console.log("room data:", roomData);
-  // console.log("room selected", selectedRooms);
+
+  const location = useLocation();
+  const hotelId = location.pathname.split('/')[2];
+
+  const { selectedRooms } = useContext(ReserveContext);
+  const { data: hotelData, loading: hotelLoading,error:hotelError } = useFetch(
+    `/hotels/find/${hotelId}`
+  );
+
+  const { data: roomData, loading: roomLoading, error: roomError } = useFetch(`/rooms/multiple/${selectedRooms.toString()}`);
 
   const [formData, setFormData] = useState({
     userId: user._id,
@@ -69,7 +50,11 @@ const ReservePage = () => {
           <ReserveDetails
             setStep={setStep}
             hotel={hotelData}
-            roomData={roomArray}
+            hotelLoading={hotelLoading}
+            hotelError={hotelError}
+            roomData={roomData}
+            roomLoading={roomLoading}
+            roomError={roomError}
             formData={formData}
             setFormData={setFormData}
           />

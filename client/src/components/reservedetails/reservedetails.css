@@ -299,6 +299,10 @@ arrival-container {
   gap: 16px;
 }
 
+arrival-container {
+  margin-bottom: 16px;
+}
+
 .arrival-container-desc {
   display: flex;
   align-items: center;

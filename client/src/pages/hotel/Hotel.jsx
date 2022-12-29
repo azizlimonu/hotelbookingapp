@@ -95,6 +95,8 @@ const Hotel = () => {
       navigate("/login");
     }
   };
+
+  // console.log("room hotel",options.room)
   return (
     <>
       <Navbar />
