@@ -27,7 +27,7 @@ router.delete('/:id/:hotelid', verifyAdmin, deleteRoom);
 router.get('/:id', getRoom);
 
 // get multiple rooms
-router.get('/multiple/:id',getMultipleRooms);
+router.get('/multiple/:ids',getMultipleRooms);
 
 // get Room
 router.get('/', getRooms);

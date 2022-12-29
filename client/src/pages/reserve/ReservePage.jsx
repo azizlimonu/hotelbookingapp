@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Navbar from '../../components/navbar/Navbar';
 import ReserveDetails from '../../components/reservedetails/ReserveDetails';
@@ -12,16 +13,35 @@ const ReservePage = () => {
   const [step, setStep] = useState(1);
   const location = useLocation();
   const hotelId = location.pathname.split('/')[2];
-  console.log(hotelId);
-
-  const { data: hotelData } = useFetch(`/hotels/${hotelId}`);
-
+  const [roomArray, setRoomArray] = useState([]);
+  // console.log(hotelId);
   const { selectedRooms } = useContext(ReserveContext);
+  // console.log("rsv[rooms]:", selectedRooms)
+  // fetch hotel data
+  const { data: hotelData } = useFetch(
+    `/hotels/find/${hotelId}`
+  );
+
+  // fetch room data
+  useEffect(() => {
+    const fetchData = async () => {
+      const roomArr = await Promise.all(
+        selectedRooms?.map((roomId) => {
+          const res = axios.get(`/rooms/multiple/${roomId}`);
+          return res
+        })
+      );
+      setRoomArray(roomArr);
+    }
+    fetchData();
+  }, [selectedRooms]);
+  // console.log("roomArr", roomArray);
+
   const { dates } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
-  const { data: roomData } = useFetch(
-    `/rooms/multiple/${selectedRooms}`
-  );
+  // console.log("hotel data:", hotelData);
+  // console.log("room data:", roomData);
+  // console.log("room selected", selectedRooms);
 
   const [formData, setFormData] = useState({
     userId: user._id,
@@ -44,24 +64,25 @@ const ReservePage = () => {
     <>
       <Navbar />
       <div className='reserve-page'>
+
         {step === 1 && (
-          <ReserveDetails 
-          setStep={setStep}
-          hotel={hotelData}
-          roomData={roomData}
-          formData={formData}
-          setFormData={setFormData}
+          <ReserveDetails
+            setStep={setStep}
+            hotel={hotelData}
+            roomData={roomArray}
+            formData={formData}
+            setFormData={setFormData}
           />
         )}
-        {step === 2 && (
-          <ReserveFinalStep 
-          setStep={setStep}
-          hotel={hotelData}
-          roomData={roomData}
-          formData={formData}
-          setFormData={setFormData}
+        {/* {step === 2 && (
+          <ReserveFinalStep
+            setStep={setStep}
+            hotel={hotelData}
+            roomData={roomData}
+            formData={formData}
+            setFormData={setFormData}
           />
-        )}
+        )} */}
       </div>
     </>
   )

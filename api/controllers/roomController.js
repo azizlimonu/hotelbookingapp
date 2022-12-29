@@ -89,8 +89,7 @@ export const getRooms = async (req, res, next) => {
 
 // get multiple rooms
 export const getMultipleRooms = async (req, res, next) => {
-  const idRooms = req.params.id.split(',');
-  console.log(idRooms);
+  const idRooms = req.params.ids.split(',');
 
   try {
     const roomList = await Promise.all(
@@ -104,13 +103,15 @@ export const getMultipleRooms = async (req, res, next) => {
     const uniqueRoomIdList = Array.from(
       new Set(formattedRoomList.map((item) => item.id)),
     );
+
     const uniqueRoomList = await Promise.all(
       uniqueRoomIdList.map((roomId) => {
         return Room.findById(roomId);
       }),
-    )
+    );
 
-  } catch (error) {
-    next(error);
+    res.status(200).json(uniqueRoomList);
+  } catch (err) {
+    next(err);
   }
 };

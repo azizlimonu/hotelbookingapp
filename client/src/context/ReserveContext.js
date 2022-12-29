@@ -10,10 +10,8 @@ const ReserveReducer = (state, action) => {
   switch (action.type) {
     case 'NEW_RESERVE':
       return action.payload;
-
     case 'RESET_RESERVE':
       return INITIAL_STATE;
-
     default:
       return state;
   }
