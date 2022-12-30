@@ -212,3 +212,9 @@
   font-size: 14px;
   color: #008009;
 }
+
+.rbp-scpir{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

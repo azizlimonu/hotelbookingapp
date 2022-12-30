@@ -14,7 +14,7 @@ const Reserve = ({ setOpen, hotelId }) => {
   const [numberOfSelect, setNumberOfSelect] = useState(0);
   const { data, loading, error } = useFetch(`/hotels/room/${hotelId}`);
   const { dates, options } = useContext(SearchContext);
-  const { selectedRooms: state, dispatch: reserveDispatch } = useContext(ReserveContext);
+  const { dispatch: reserveDispatch } = useContext(ReserveContext);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -57,7 +57,6 @@ const Reserve = ({ setOpen, hotelId }) => {
         : selectedRooms.filter((item) => item !== value),
     );
   };
-  // console.log("selectedRooms", selectedRooms);
 
   const handleReserve = async () => {
     try {
@@ -73,7 +72,6 @@ const Reserve = ({ setOpen, hotelId }) => {
       console.log(error)
     }
   };
-  console.log("state rooms", state);
 
   return (
     <div className="reserve">

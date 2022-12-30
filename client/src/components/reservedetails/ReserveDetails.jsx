@@ -6,7 +6,6 @@ import ReserveSideBar from '../reservedetails/ReserveSideBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faCircleCheck, faDesktop, faParking, faStar, faUserTie, faUtensils, faVanShuttle, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
-import { ReserveContext } from '../../context/ReserveContext';
 
 const ReserveDetails = ({
   hotel,
@@ -22,18 +21,13 @@ const ReserveDetails = ({
 
   const { dates } = useContext(SearchContext);
   const { user } = useContext(AuthContext);
-  const { selectedRooms } = useContext(ReserveContext);
 
   const handleChange = (key, value) => {
     setFormData((prev) => {
       return { ...prev, [key]: value };
     });
   };
-  // console.log("Room is now", selectedRooms);
-  // console.log(hotel);
-  // console.log(roomData)
 
-  // console.log("prop room", roomData);
   return (
     <div className="reserved">
       {roomLoading ? "Room Is Loading" : roomError ? "Room Error" : (

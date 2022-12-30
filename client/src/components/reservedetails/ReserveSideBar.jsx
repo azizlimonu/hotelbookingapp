@@ -9,7 +9,7 @@ const ReserveSideBar = ({ roomData, hotel }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { dates, options } = useContext(SearchContext);
+  const { dates } = useContext(SearchContext);
   const { selectedRooms } = useContext(ReserveContext);
 
   const hotelId = location.pathname.split('/')[2];
@@ -20,12 +20,20 @@ const ReserveSideBar = ({ roomData, hotel }) => {
     const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
     const diffDays = Math.ceil(timeDiff / millSeconds);
     return diffDays;
-  }
+  };
+
   const numberOfDays = dayDifference(dates[0].startDate, dates[0].endDate);
 
-  const price = roomData && numberOfDays * roomData.price * options.room;
+  // const price = hotel && numberOfDays * hotel.cheapestPrice * options.room;
 
-  console.log(price, typeof (price));
+  const price = roomData && roomData?.map((x) => (x.price * numberOfDays)).reduce((a, b) => a + b);
+  console.log(numberOfDays);
+  // if(options.room === roomData.length)
+  console.log("price", price, typeof (price))
+  // console.log("room price", roomPrice);
+  // console.log("hotel", hotel);
+  // console.log("room", roomData);
+
 
   const handleSelectionChange = () => {
     navigate(`/hotels/${hotelId}`);
@@ -55,7 +63,7 @@ const ReserveSideBar = ({ roomData, hotel }) => {
 
           <div className="rbdcd-l">
             <h5>Total length of stay:</h5>
-            <span>1 night</span>
+            <span>{numberOfDays}{' '} night</span>
           </div>
           <hr />
 
@@ -91,8 +99,17 @@ const ReserveSideBar = ({ roomData, hotel }) => {
         <div className="rbp-sc">
           <div className="rbp-s-cp">
             <div className="rbp-scpi">
-              <span>{roomData.title}</span>
-              <span>US${price}</span>
+              <div className='rbp-scpir'>
+                {roomData?.map((room, i) => (
+                  <span key={i}>{room.title}</span>
+                ))}
+              </div>
+              <div className='rbp-scpir'>
+                {roomData?.map((room, i) => (
+                  <span key={i}>US$ {room.price}</span>
+                ))}
+              </div>
+
             </div>
 
             <div className="rbp-scpi">
