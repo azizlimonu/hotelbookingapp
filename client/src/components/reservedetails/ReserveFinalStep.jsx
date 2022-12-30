@@ -86,7 +86,7 @@ const ReserveFinalStep = ({
   };
 
   return (
-    <div rf>
+    <div className='rf'>
       {roomLoading ? "Room Is Loading" : roomError ? "Room Error" : (
         roomData && (
           <ReserveSideBar roomData={roomData} hotel={hotel} />
@@ -161,7 +161,7 @@ const ReserveFinalStep = ({
                       <label>Country/region *</label>
                       <input
                         type="text"
-                        placeholder="Viet Nam"
+                        placeholder="United State"
                         defaultValue={formData.country}
                         onChange={(e) => handleChange('country', e.target.value)}
                       />

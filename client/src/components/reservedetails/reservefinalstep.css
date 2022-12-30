@@ -1,0 +1,262 @@
+.rf {
+  display: flex;
+  width: 100%;
+  max-width: 1140px;
+  margin: 40px auto;
+  gap: 24px;
+}
+
+.rfp {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.rfpc {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rfpch {
+  padding: 16px;
+  border: 1px solid lightgray;
+}
+
+.rfpchc {
+  display: flex;
+  gap: 16px;
+}
+
+.rfpchci {
+  width: 160px;
+  height: 160px;
+}
+
+.rfpchcd {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rfpchcdt {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.rfpchcdt span {
+  font-size: 12px;
+}
+
+.rfpchcdrev {
+  color: #008009;
+}
+
+.rfpchcdrat {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rfpchcdrat button {
+  background-color: #003580;
+  color: white;
+  padding: 4px;
+  font-size: 12px;
+  border: none;
+  border-radius: 4px 4px 4px 0;
+}
+
+.rfpchcds {
+  display: flex;
+  gap: 10px;
+}
+
+.rfpchcdsi {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  font-size: 12px;
+}
+
+.rfpcd {
+  padding: 16px;
+  border: 1px solid lightgray;
+  background-color: #ebf3ff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rfpcdh {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.rfpcdht {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rfpcdht span {
+  color: #006607;
+  background-color: #d2edd5;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.rfpcdf {
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+.rfpcdfd {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rfpcdfdc {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rfpcdfdc label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.rfpcdfdc input {
+  font-size: 14px;
+  padding: 6px 26px 6px 8px;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+.rfpcdfdp {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rfpcdfdp label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.rfpcdfdp input {
+  font-size: 14px;
+  padding: 6px 26px 6px 8px;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+}
+
+.rfpcdfdp span {
+  padding-top: 4px;
+  color: gray;
+  font-size: 14px;
+}
+
+.rfpcdfi {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 0.5px solid lightgray;
+  padding: 16px;
+}
+
+.rfpcdfin,
+.rfpcdfie {
+  display: flex;
+  flex-direction: column;
+}
+
+.rfpcdfin span,
+.rfpcdfie span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.rfpcdfin div,
+.rfpcdfie div {
+  font-size: 14px;
+  color: gray;
+}
+
+.rfpcm-i {
+  padding: 16px;
+}
+
+.rfpcm-ii {
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.rfpcm-ii span {
+  color: #0071c2;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rfpcm-iii {
+  font-size: 14px;
+}
+
+.rfpcm-iii span {
+  color: #0071c2;
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rfpbg {
+  display: flex;
+  gap: 10px;
+}
+
+.rfpbgp-b {
+  background-color: white;
+  color: #0071c2;
+  border: 1px solid #0071c2;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.rfpbgp-b span {
+  margin-left: 8px;
+}
+
+.rfpbgr-b {
+  background-color: #0071c2;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.rfpbgr-b span {
+  margin-left: 8px;
+}
+
+.rfpbgr-b:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
