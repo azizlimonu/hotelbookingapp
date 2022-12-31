@@ -36,7 +36,7 @@ const NewHotel = () => {
           data.append("file", file);
           data.append("upload_preset", "upload");
           const uploadResponse = await axios.post(
-            "https://api.cloudinary.com/v1_1/di7pxwxss/image/upload",
+            "https://api.cloudinary.com/v1_1/deoncr1n7/image/upload",
             data
           );
 
@@ -110,15 +110,15 @@ const NewHotel = () => {
               </div>
               <div className="selectRooms">
                 <label>Rooms</label>
-                <select id="rooms" multiple onChange={handleSelect}>
+                <select className="selectRooms" id="rooms" multiple onChange={handleSelect}>
                   {loading
                     ? "Loading"
                     : data &&
-                    data.map((room) => (
-                      <option key={room._id} value={room._id}>
-                        {room.title}
-                      </option>
-                    ))}
+                      data.map((room) => (
+                        <option key={room._id} value={room._id}>
+                          {room.title}
+                        </option>
+                      ))}
                 </select>
               </div>
               <button onClick={handleClick}>Send</button>
